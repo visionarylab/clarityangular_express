@@ -10,14 +10,24 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Point static path to dist
-app.use(express.static(path.join(__dirname, 'dist')));
 
+/*
+// Point static path to dist
+app.use(express.static(path.join(__dirname + 'client/dist/index.html')));
+
+//Custom way or 
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/dist/index.html'));
 });
+
+
+*/
+
+app.use('/', require('./routes/index'));
+app.use(express.static(path.join(__dirname, 'client/dist')));
+
 
 /**
  * Get port from environment and store in Express.
